@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:orex/components/table.dart';
 import 'package:orex/extensions/colors.dart';
+import 'package:orex/extensions/common.dart';
 import 'package:orex/screens/subscribe_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../components/limit_exceed_dialog.dart';
 import '../extensions/decorations.dart';
 import '../extensions/extension_util/context_extensions.dart';
@@ -35,6 +37,16 @@ class SliderDetailsScreen extends StatefulWidget {
 }
 
 class _SliderDetailsScreenState extends State<SliderDetailsScreen> {
+  Future<void> openPdf(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      toast('Could not open PDF');
+    }
+  }
+
   PropertyDetailsModel? mDetail;
   propertyDetailCall() async {
     appStore.setLoading(true);
@@ -114,6 +126,42 @@ class _SliderDetailsScreenState extends State<SliderDetailsScreen> {
                           },
                         ),
                         10.height,
+                        Text('PDF',
+                            style: primaryTextStyle(
+                                color: appStore.isDarkModeOn
+                                    ? textOnDarkMode
+                                    : textOnLightMode)),
+                        10.height,
+                        widget.slider.pdfFile.validate() !=
+                                'https://oryxinvestmentsegypt.com/images/default.png'
+                            ? Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: appStore.isDarkModeOn
+                                      ? darkGrayColor
+                                      : primaryVariant,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(Icons.picture_as_pdf),
+                                  onPressed: () {
+                                    openPdf(widget.slider.pdfFile.validate());
+                                  },
+                                ),
+                              )
+                            : Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: appStore.isDarkModeOn
+                                      ? darkGrayColor
+                                      : primaryVariant,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(Icons.close),
+                                  onPressed: () {},
+                                ),
+                              ),
                         Text(language.description,
                             style: primaryTextStyle(
                                 color: appStore.isDarkModeOn
