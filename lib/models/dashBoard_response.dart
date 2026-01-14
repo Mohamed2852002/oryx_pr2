@@ -622,7 +622,9 @@ class Property {
     categoryId = json['category_id'];
     category = json['category'];
     categoryImage = json['category_image'];
-    price = json['price'];
+    price = json['price'] is num
+        ? (json['price'] as num).toInt()
+        : int.tryParse(json['price'].toString());
     priceFormat = json['price_format'];
     address = json['address'];
     status = json['status'];
@@ -738,7 +740,9 @@ class OwnerProperty {
     categoryId = json['category_id'];
     category = json['category'];
     categoryImage = json['category_image'];
-    price = json['price'];
+    price = price = json['price'] is num
+        ? (json['price'] as num).toInt()
+        : int.tryParse(json['price'].toString());
     priceFormat = json['price_format'];
     address = json['address'];
     status = json['status'];
@@ -815,7 +819,9 @@ class AdvertisementProperty {
     categoryId = json['category_id'];
     category = json['category'];
     categoryImage = json['category_image'];
-    price = json['price'];
+    price = json['price'] is num
+        ? (json['price'] as num).toInt()
+        : int.tryParse(json['price'].toString());
     priceFormat = json['price_format'];
     address = json['address'];
     status = json['status'];
@@ -892,7 +898,9 @@ class NearbyProperty {
     categoryId = json['category_id'];
     category = json['category'];
     categoryImage = json['category_image'];
-    price = json['price'];
+    price = json['price'] is num
+        ? (json['price'] as num).toInt()
+        : int.tryParse(json['price'].toString());
     priceFormat = json['price_format'];
     address = json['address'];
     status = json['status'];
@@ -969,7 +977,9 @@ class FullyFurnishedProperty {
     categoryId = json['category_id'];
     category = json['category'];
     categoryImage = json['category_image'];
-    price = json['price'];
+    price = json['price'] is num
+        ? (json['price'] as num).toInt()
+        : int.tryParse(json['price'].toString());
     priceFormat = json['price_format'];
     address = json['address'];
     status = json['status'];

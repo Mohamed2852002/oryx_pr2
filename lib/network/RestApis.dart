@@ -559,7 +559,7 @@ Future<void> logout(BuildContext context, {bool isFromLogin = false}) async {
 //Sliders by City
 Future<List<MSlider>> getSlidersByCity(String city) async {
   final response = await handleResponse(
-    await buildHttpResponse('slider-by-city?city=$city',
+    await buildHttpResponse('unique-slider-list?city=$city',
         method: HttpMethod.GET),
   );
   if (response is Map<String, dynamic> && response.containsKey('data')) {
